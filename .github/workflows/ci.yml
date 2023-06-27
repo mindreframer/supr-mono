@@ -50,8 +50,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm build
+      # - name: Build
+      # run: pnpm build
 
       - name: Test
         run: pnpm test
+
+      - run: ls -la /home/runner/work/supr-mono/supr-mono/node_modules/.cache/turbo
+      - run: env|sort
