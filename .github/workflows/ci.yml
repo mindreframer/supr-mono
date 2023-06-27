@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TURBO_CACHE_PATH: /home/runner/work/supr-mono/supr-mono/node_modules/.cache/turbo
+      TURBO_TOKEN: turbotoken-oss-europe1
+      TURBO_API: https://eu.trrc.ducktors.dev
     # To use Remote Caching, uncomment the next lines and follow the steps below.
     # env:
     #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
