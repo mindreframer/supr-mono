@@ -2,6 +2,12 @@
 
 This is an official starter Turborepo with multiple meta-frameworks all working in harmony and sharing packages.
 
+## Running tests (watch mode)
+
+```bash
+$ turbo run test -- --watch
+```
+
 ## Using this example
 
 Run the following command:
