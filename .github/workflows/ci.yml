@@ -24,19 +24,6 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Cache Turborepo output
-        id: cache-turborepo
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-turborepo
-        with:
-          path: ${{ env.TURBO_CACHE_PATH }}
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('/home/runner/work/supr-mono/supr-mono/node_modules/.cache/turbo/**-meta.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.32.2
@@ -49,6 +36,19 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Cache Turborepo output
+        id: cache-turborepo
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-turborepo
+        with:
+          path: ${{ env.TURBO_CACHE_PATH }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('/home/runner/work/supr-mono/supr-mono/node_modules/.cache/turbo/**-meta.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       # - name: Build
       # run: pnpm build
