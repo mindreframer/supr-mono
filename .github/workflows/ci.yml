@@ -31,7 +31,7 @@ jobs:
           cache-name: cache-turborepo
         with:
           path: ${{ env.TURBO_CACHE_PATH }}
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('$TURBO_CACHE_PATH/**-meta.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('/home/runner/work/supr-mono/supr-mono/node_modules/.cache/turbo/**-meta.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
