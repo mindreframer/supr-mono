@@ -22,23 +22,37 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Cache node modules
-        id: cache-npm
+      # - name: Cache node modules
+      #   id: cache-npm
+      #   uses: actions/cache@v3
+      #   env:
+      #     cache-name: cache-pnpm-modules
+      #   with:
+      #     path: |
+      #       ~/.pnpm-store
+      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-build-${{ env.cache-name }}-
+      #       ${{ runner.os }}-build-
+      #       ${{ runner.os }}-
+
+     - name: Cache Turborepo output
+        id: cache-turborepo
         uses: actions/cache@v3
         env:
-          cache-name: cache-pnpm-modules
+          cache-name: cache-turborepo
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: node_modules/.cache/turbo/
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('node_modules/.cache/turbo/**-meta.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: List the state of node modules
-        continue-on-error: true
-        run: npm list
+      # - if: ${{ steps.cache-turborepo.outputs.cache-hit != 'true' }}
+      #   name: List the state of node modules
+      #   continue-on-error: true
+      #   run: npm list
 
       - uses: pnpm/action-setup@v2.0.1
         with:
